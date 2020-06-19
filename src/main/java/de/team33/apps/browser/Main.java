@@ -1,27 +1,22 @@
 package de.team33.apps.browser;
 
-import de.team33.libs.gui.BrowserWindow;
-import de.team33.libs.gui.FrameManager;
+import de.team33.apps.browser.ui.BrowserPane;
+import de.team33.apps.browser.ui.Fxml;
+import javafx.application.Application;
+import javafx.stage.Stage;
 
-import javax.swing.*;
+import java.io.IOException;
 
-public class Main implements Runnable {
-
-    private final Args args;
-    private final FrameManager frames;
-
-    private Main(final Args args) {
-        this.args = args;
-        this.frames = new FrameManager();
-    }
+public class Main extends Application {
 
     public static void main(final String[] args) {
-        SwingUtilities.invokeLater(new Main(new Args(args)));
+        launch(Main.class, args);
     }
 
     @Override
-    public final void run() {
-        JOptionPane.showMessageDialog(null, "Diese Anwendung erwartet den Pfad/Dateinamen einer MIDI-Datei als Parameter.", "Keine Datei angegeben", JOptionPane.ERROR_MESSAGE);
-        new BrowserWindow().open();
+    public final void start(final Stage stage) throws IOException {
+        stage.setTitle("Browser");
+        stage.setScene(Fxml.load(BrowserPane.class));
+        stage.show();
     }
 }
